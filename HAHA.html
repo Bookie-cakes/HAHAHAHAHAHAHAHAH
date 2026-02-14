@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine?</title>
+
+<!-- Pixel Font -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(to top, #000000, #4b0082);
+    color: #ffffff;
+    text-align: center;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    font-size: 18px;
+    margin-bottom: 50px;
+    text-shadow: 4px 4px #000;
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    padding: 15px 25px;
+    margin: 20px;
+    border: 4px solid #ffffff;
+    background-color: #8000ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #a64dff;
+}
+
+#noBtn {
+    position: absolute;
+}
+
+.pixel-art {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+.celebration {
+    display: none;
+    margin-top: 30px;
+    animation: pop 1s ease forwards;
+}
+
+@keyframes pop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+.dance {
+    animation: dance 0.5s infinite alternate;
+}
+
+@keyframes dance {
+    from { transform: rotate(-10deg); }
+    to { transform: rotate(10deg); }
+}
+
+.link-btn {
+    display: none;
+    margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>💜 Will you be my valentine's? 💜</h1>
+
+    <button onclick="sayYes()">YES 💕</button>
+    <button id="noBtn" onmouseover="moveNo()">NO ❌</button>
+
+    <div class="pixel-art">
+        🐱 🐶 🐱 🐶
+    </div>
+</div>
+
+<div class="celebration" id="celebration">
+    <h1>I knew it Baby!, you'll say yes!. Mwahh 💋</h1>
+    
+    <div class="pixel-art dance">
+        🐱💃 🐱💃 🐱💃 🐶🎉
+    </div>
+
+    <!-- EDIT THIS LINK -->
+    <button class="link-btn" id="linkBtn" onclick="goToLink()">Click Me 💌</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+function moveNo() {
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 150);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+function sayYes() {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("celebration").style.display = "block";
+    document.getElementById("linkBtn").style.display = "inline-block";
+}
+
+function goToLink() {
+    // 🔥 REPLACE THIS LINK WITH YOUR OWN
+    window.location.href = "https://example.com";
+}
+</script>
+
+</body>
+</html>
