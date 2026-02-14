@@ -1,133 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-bit love · our complete story</title>
+    <!-- pixel valentine – with fully visible love letter -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+        }
 
-<!-- Pixel Font -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        /* ===== DARK BACKGROUND WITH VISIBLE FALLING STARS ===== */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            margin: 0;
+            font-family: 'Courier New', Courier, 'Press Start 2P', monospace;
+            
+            /* deep dark base */
+            background: #030006;
+            
+            /* bright stars */
+            background-image: 
+                radial-gradient(4px 4px at 7% 12%, #fff9e6 3px, transparent 4px),
+                radial-gradient(5px 5px at 18% 43%, #ffffd0 4px, transparent 5px),
+                radial-gradient(3px 3px at 29% 78%, #fff2b5 2px, transparent 3px),
+                radial-gradient(4px 4px at 41% 22%, #ffffe0 3px, transparent 4px),
+                radial-gradient(6px 6px at 53% 67%, #fff9cc 5px, transparent 6px),
+                radial-gradient(4px 4px at 64% 35%, #ffffd4 3px, transparent 4px),
+                radial-gradient(5px 5px at 76% 89%, #fff2b0 4px, transparent 5px),
+                radial-gradient(3px 3px at 88% 51%, #ffffea 2px, transparent 3px),
+                radial-gradient(4px 4px at 94% 16%, #fff9d9 3px, transparent 4px),
+                radial-gradient(2px 2px at 12% 27%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 24% 58%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 36% 83%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 48% 44%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 59% 19%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 71% 72%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 83% 38%, #ffffff 2px, transparent 2px),
+                radial-gradient(2px 2px at 95% 94%, #ffffff 2px, transparent 2px),
+                repeating-linear-gradient(45deg, rgba(255, 255, 200, 0.5) 0px, rgba(255, 255, 200, 0.5) 3px, transparent 3px, transparent 45px),
+                repeating-linear-gradient(135deg, rgba(255, 255, 220, 0.4) 0px, rgba(255, 255, 220, 0.4) 3px, transparent 3px, transparent 50px);
+            
+            background-size: 
+                200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px,
+                200px 200px, 200px 200px, 200px 200px, 200px 200px,
+                150px 150px, 150px 150px, 150px 150px, 150px 150px, 150px 150px,
+                150px 150px, 150px 150px, 150px 150px,
+                100% 100%, 100% 100%;
+            
+            animation: starFall 8s linear infinite;
+            position: relative;
+        }
 
-<style>
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Press Start 2P', cursive;
-    background: linear-gradient(to top, #000000, #4b0082);
-    color: #ffffff;
-    text-align: center;
-}
+        @keyframes starFall {
+            0% { background-position: 0% 0%, 2% 3%, 4% 6%, 6% 9%, 8% 12%, 10% 15%, 12% 18%, 14% 21%, 16% 24%, 0% 0%, 5% 5%, 10% 10%, 15% 15%, 20% 20%, 25% 25%, 30% 30%, 35% 35%, 0% 0%, 0% 0%; }
+            100% { background-position: 20% 100%, 22% 103%, 24% 106%, 26% 109%, 28% 112%, 30% 115%, 32% 118%, 34% 121%, 36% 124%, 100% 100%, 105% 105%, 110% 110%, 115% 115%, 120% 120%, 125% 125%, 130% 130%, 135% 135%, 20% 20%, 20% 20%; }
+        }
 
-.container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(10, 0, 20, 0.3) 0%, #020001 90%);
+            pointer-events: none;
+            z-index: 1;
+        }
 
-h1 {
-    font-size: 18px;
-    margin-bottom: 50px;
-    text-shadow: 4px 4px #000;
-}
+        /* main card */
+        .valentine-panel {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(12, 4, 22, 0.85);
+            backdrop-filter: blur(8px);
+            border: 4px solid rgba(200, 130, 255, 0.8);
+            box-shadow: 0 0 80px #c285ff, 0 0 30px #9f4fd6 inset, 18px 18px 0 #0e0516;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 20;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-button {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px;
-    padding: 15px 25px;
-    margin: 20px;
-    border: 4px solid #ffffff;
-    background-color: #8000ff;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-}
+        /* custom scrollbar */
+        .valentine-panel::-webkit-scrollbar {
+            width: 12px;
+            background: #1a0a24;
+        }
+        .valentine-panel::-webkit-scrollbar-thumb {
+            background: #a069c0;
+            border: 2px solid #dab0ff;
+        }
 
-button:hover {
-    background-color: #a64dff;
-}
+        /* moving characters */
+        .character-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            filter: drop-shadow(0 0 25px #e7b5ff);
+        }
 
-#noBtn {
-    position: absolute;
-}
+        .character {
+            font-size: 4rem;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(35, 12, 48, 0.85);
+            padding: 0.3rem 0.6rem;
+            border-radius: 30% 30% 15% 15%;
+            box-shadow: 5px 7px 0 #1f0d28, 0 0 45px #d49eff;
+            min-width: 6.5rem;
+            animation: float1 2.5s infinite alternate;
+        }
 
-.pixel-art {
-    font-size: 30px;
-    margin-top: 40px;
-}
+        .character:nth-child(2) { animation: float2 3.2s infinite alternate; }
+        .character:nth-child(3) { animation: float3 2.8s infinite alternate; }
+        .character:nth-child(4) { animation: float4 3.5s infinite alternate; }
+        .character:nth-child(5) { animation: float1 3s infinite alternate-reverse; }
+        .character:nth-child(6) { animation: float2 2.7s infinite alternate-reverse; }
 
-.celebration {
-    display: none;
-    margin-top: 30px;
-    animation: pop 1s ease forwards;
-}
+        @keyframes float1 {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-10px) rotate(4deg); }
+        }
+        @keyframes float2 {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-8px) rotate(-4deg); }
+        }
+        @keyframes float3 {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-12px) scale(1.08); }
+        }
+        @keyframes float4 {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(5px) translateY(-9px); }
+        }
 
-@keyframes pop {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
-}
+        /* main message */
+        .pixel-love-message {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff5ff;
+            background: rgba(48, 18, 65, 0.96);
+            padding: 1.5rem;
+            line-height: 1.6;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            border: 4px solid #e3b0ff;
+            box-shadow: 0 0 90px #cc80ff, 0 0 40px #b257ec inset, 18px 18px 0 #1a0b22;
+            margin: 1rem 0 1.5rem;
+            width: 100%;
+            text-shadow: 0 0 35px #ffc8ff, 8px 8px 0 #3f1d50;
+        }
 
-.dance {
-    animation: dance 0.5s infinite alternate;
-}
+        /* prompt button */
+        .read-prompt {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.8rem;
+            background: rgba(138, 50, 180, 0.96);
+            color: #fff5f0;
+            padding: 1.5rem 2.5rem;
+            border: 4px solid #f5c2ff;
+            box-shadow: 0 0 100px #cc7aff, 0 0 50px #b244e0 inset, 18px 18px 0 #180d1f;
+            margin: 1rem 0 1.5rem;
+            text-align: center;
+            text-shadow: 0 0 25px white, 8px 8px 0 #341a42;
+            letter-spacing: 4px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-@keyframes dance {
-    from { transform: rotate(-10deg); }
-    to { transform: rotate(10deg); }
-}
+        .read-prompt:hover {
+            background: rgba(165, 80, 215, 0.98);
+            border-color: #ffe6ff;
+            box-shadow: 0 0 140px #f0b3ff, 0 0 70px #de8eff inset, 18px 18px 0 #2d143b;
+            transform: scale(1.02) translateY(-3px);
+        }
 
-.link-btn {
-    display: none;
-    margin-top: 30px;
-}
-</style>
+        /* decor row */
+        .character-decor {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 1rem 0 1.5rem;
+            color: #fad4ff;
+            font-size: 2.2rem;
+            text-shadow: 0 0 50px #ffaaff;
+            flex-wrap: wrap;
+        }
+
+        .decor-item {
+            background: rgba(40, 15, 55, 0.8);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            box-shadow: 0 0 40px #d19eff;
+        }
+
+        /* ===== CELEBRATION AREA – NOW WITH FULLY VISIBLE TEXT ===== */
+        .celebration-stage {
+            width: 100%;
+            background: rgba(25, 8, 40, 0.98);
+            backdrop-filter: blur(6px);
+            margin-top: 1.5rem;
+            padding: 2rem;
+            border: 4px solid #f0bcff;
+            box-shadow: 0 0 100px #e199ff, inset 0 0 50px #b864e0, 18px 18px 0 #1b0b24;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadePop 0.5s;
+        }
+
+        @keyframes fadePop {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .dancing-characters {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 50px #ffbef5);
+            animation: danceParty 0.8s infinite steps(4);
+        }
+
+        @keyframes danceParty {
+            0% { transform: translateX(0) rotate(0); }
+            33% { transform: translateX(-8px) rotate(-4deg); }
+            66% { transform: translateX(8px) rotate(4deg); }
+        }
+
+        .dance-char {
+            filter: drop-shadow(0 0 40px #ffaaff);
+            animation: danceGlow 1s infinite alternate;
+        }
+
+        @keyframes danceGlow {
+            0% { filter: drop-shadow(0 0 20px #f49bff); }
+            100% { filter: drop-shadow(0 0 70px #ffdbff); }
+        }
+
+        .pixel-confetti {
+            font-size: 2.4rem;
+            letter-spacing: 16px;
+            color: #ffe0ff;
+            text-shadow: 0 0 50px #ff80ff;
+            margin: 0.5rem 0 1.5rem;
+            animation: sparkle 1s infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.8; text-shadow: 0 0 30px #ffaaff; }
+            100% { opacity: 1; text-shadow: 0 0 80px #ffddff; }
+        }
+
+        /* ===== THE LOVE LETTER – NOW FULLY VISIBLE AND SCROLLABLE ===== */
+        .love-letter {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #f3e2ff;
+            background: rgba(45, 20, 65, 0.9);
+            padding: 2rem;
+            border: 3px solid #d9a5ff;
+            box-shadow: inset 0 0 30px #a55acf, 8px 8px 0 #2f1540;
+            margin: 1.5rem 0;
+            width: 100%;
+            text-shadow: 2px 2px 0 #2a1035;
+            letter-spacing: 0.5px;
+            text-align: left;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .love-letter p {
+            margin-bottom: 1.2rem;
+        }
+
+        .love-letter::-webkit-scrollbar {
+            width: 10px;
+            background: #1a0a24;
+        }
+        .love-letter::-webkit-scrollbar-thumb {
+            background: #b27ad6;
+            border: 2px solid #e9b5ff;
+        }
+
+        .click-link-btn {
+            font-size: 1.8rem;
+            padding: 1.2rem 2.5rem;
+            background: rgba(150, 60, 200, 0.98);
+            border: 4px solid #ffc3ff;
+            box-shadow: 0 0 90px #d988ff, 0 0 50px #b852e6 inset, 14px 14px 0 #1d0d26;
+            color: #fffae5;
+            font-family: 'Press Start 2P', monospace;
+            margin: 1rem 0 0.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px white, 5px 5px 0 #2d1538;
+        }
+
+        .click-link-btn:hover {
+            background: rgba(180, 90, 235, 1);
+            border-color: #ffe6ff;
+            box-shadow: 0 0 140px #ffc0ff, 0 0 70px #f0a0ff inset, 10px 10px 0 #2b1537;
+            transform: translateY(-5px);
+        }
+
+        .floating-hearts {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            font-size: 2.2rem;
+            color: #ffc0f0;
+            text-shadow: 0 0 50px #ff80ff;
+            display: flex;
+            justify-content: space-around;
+            opacity: 0.7;
+            animation: floatLove 7s infinite linear;
+            z-index: 25;
+        }
+
+        @keyframes floatLove {
+            0% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-20px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.6; }
+        }
+
+        @media (max-width: 700px) {
+            .character { font-size: 3rem; min-width: 5rem; }
+            .pixel-love-message { font-size: 1.5rem; letter-spacing: 4px; }
+            .read-prompt { font-size: 1.4rem; padding: 1.2rem; }
+            .love-letter { font-size: 1rem; padding: 1.5rem; }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="valentine-panel">
+        <div class="floating-hearts">
+            <span>💗</span> <span>💖</span> <span>💜</span> <span>💕</span> <span>💞</span> <span>💘</span>
+        </div>
 
-<div class="container" id="main">
-    <h1>💜 Will you be my valentine's? 💜</h1>
+        <!-- moving characters -->
+        <div class="character-row">
+            <span class="character kuromi">👻🎀</span>
+            <span class="character melody">🐰💖</span>
+            <span class="character cinnamoroll">🐻‍❄️✨</span>
+            <span class="character keroppi">🐸💚</span>
+            <span class="character kuromi" style="transform: scaleX(-1);">👻🌸</span>
+            <span class="character melody">🐰🌸</span>
+        </div>
 
-    <button onclick="sayYes()">YES 💕</button>
-    <button id="noBtn" onmouseover="moveNo()">NO ❌</button>
+        <!-- main message -->
+        <div class="pixel-love-message">
+            I ❤️ LOVE YOU
+        </div>
 
-    <div class="pixel-art">
-        🐱 🐶 🐱 🐶
+        <!-- prompt button -->
+        <div id="readPrompt" class="read-prompt">
+            Be sure to read the whole thing 📖✨
+        </div>
+
+        <!-- decor row -->
+        <div class="character-decor">
+            <span class="decor-item">💜</span>
+            <span class="decor-item">👻🎀</span>
+            <span class="decor-item">💖</span>
+            <span class="decor-item">🐰</span>
+            <span class="decor-item">💗</span>
+        </div>
+
+        <!-- CELEBRATION AREA with complete love letter -->
+        <div id="celebrationArea" class="celebration-stage">
+            <div class="dancing-characters">
+                <span class="dance-char">👻🎀</span>
+                <span class="dance-char">🐰💖</span>
+                <span class="dance-char">🐻‍❄️✨</span>
+                <span class="dance-char">🐸💚</span>
+                <span class="dance-char">👻🌸</span>
+                <span class="dance-char">🐰🌸</span>
+            </div>
+            <div class="pixel-confetti">
+                ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦
+            </div>
+            
+            <!-- THE COMPLETE LOVE LETTER – FULLY VISIBLE -->
+            <div class="love-letter">
+                <p>Books are the best thing that has ever been invented. Can you imagine a world without them? They are the closest thing we can call a time machine. Each book contains its own stories, some imagined and some drawn from reality itself. I will always be in awe of how people can write stories based on what they feel. Ah, would you say yes if I invited you to create our own story together? Come closer, I said it because I want you to incinerate my heart until it is reborn from the ashes of what I once was.</p>
+
+                <p>My love, I want to tell you that I love you deeply with every fragment of reality that can ever be comprehended. I may not be the best man you have had or will meet, but I want to do the best that I can, even if it does not satisfy the kind of craving you have for love. I express my love differently from what your eyes can see. I do things that will normally challenge people's minds. I might make some mistakes once in a while, and sometimes I won't even be able to tell until you tell me directly and lecture me about it. I always look forward to that since it's how I can reflect on my mistakes, even if sometimes it contradicts my own perspective, I mean, everyone has their own perspective, right? So do I, and so do you, and I will always be grateful for how you can directly tell me whenever something bothers you.</p>
+
+                <p>I can be so random, maybe a little too clingy, or maybe a little perplexed, to be unable to dissect reality that it comes from each person's perspective, and not only mine. As I know to myself that there are greater things in life, I may or may not be the one, but at the cost of everything, I would do things I've been scared of doing my entire life. I would take the risk of a thousand heartbreaks if that is what it takes to keep in touch with you. You have shown me things I never thought I should believe that were true. You're the constant idea of what my greatest goal in life is, and I'm merely living as if I had already achieved that goal.</p>
+
+                <p>Being with you makes me feel at ease. The way you laugh, talk, smile, and everything that you do is astounding; the way you care, the way you tell me things I shouldn't do, the way you make me feel seen and validated. You're the color to my life that was once dull; you gave meaning to my existence, as my body falls beneath all the hatred I endure within myself, there you are at standby ready to catch me when I fall. A love like yours is the essence of both chaos and peace. With the little mini heart attacks just for me to reflect and learn from my mistakes, it was for me to know better.</p>
+
+                <p>I could compare you with many different random things in this world. I guess let's start with the basics: you are the apple to my pie, the peanut butter to my jelly, the sun to my morning, the moon to my night, the straw to my berry, the lyrics to my song, the pen to my paper, the story to my book, the spark to my fire, the password to my heart, the boba to my milk tea, the milk to my cookies, the coffee to my mornings, the constant to my equation, the rhythm to my melody, the orbit to my planets, the 1 to my binary, and the forever to my always.</p>
+
+                <p>It's me, wondering and always questioning whether I would be enough. Ahh, I don't know HAHAHA maybe I am, or maybe I am not. I guess we'll find out somehow? I want to be the one, but Ahhhmm, I don't know, there are so many factors to consider, right? All I want to do is be goofy and childish with you. But then again, you made me realize a lot of things, and somehow being childish and goofy can't always help us whenever we have to express our love for each other, or whenever we are having arguments.</p>
+
+                <p>The northern star shines brightest, and I say that you are my northern star. The way you explicitly deliver what your heart is feeling, I adore it so much. You can be bold, be true, and that makes you shine the most. I think you'll kill me after this message lol. This should be a love letter, and I am so confused about where this is going. An apology, love, assurance, introspection, and self-doubt kind of letter all at once, I guess. At this point, if god forbids, then I should act according to fate and fight like an angel with a shotgun regardless of whether heaven would take me back. I mean, loving you unconditionally is better than losing you, towards the future that may hold us into a different chapter, all I wish is for you to be there whenever and forever.</p>
+
+                <p>Anywayyy, I mean, I will send this message at Valentine's. I just want to express the kind of love that we have, or I have for you. It is chaotic and fun and hard and true and wild and goofy and just hard to explain because we can just do whatever, and if that hurts someone, we just adjust, and that's about it. It is how we validate each other's feelings so that the other party will not feel left out or insecure, or that there's a big mistake that can not be fixed.</p>
+
+                <p>Let's put this into the perspective of some of my favorite subjects, just like science, math, history, and maybe other facts and trivia I find interesting. Let's see, hmmm. You are the valence to my electron, you are the reason I react, the reason I bond, the reason I am not inert in a universe that will certainly leave me untouched. You are the axis of my rotation; without you, I spin but with no direction. You are my event horizon; the closer I get, the harder it gets to escape your pull. You are the catalyst to my reaction; you speed up my transformation without losing yourself in the process. I guess we are also covalent, in which we do not take from each other, but we share the same bond and interests. You are my equilibrium; you made my chaos finally balance itself. You are the pulse of a distant star to which I can not possibly see, but I can still feel. You are my supernova; you reshaped everything I knew with a beautiful explosion.</p>
+
+                <p>Alrighty enough with this scientific stuff, you are probably spiraling from all these facts, but baby, we are not near finishing this story. Let's try math this time around. You are the constant in my equation; no matter how chaotic the variables may become, you stay constant. You are my infinity, not because you are timeless, but because my love for you does not have any limit. In my life, we are a function; you are the derivative because every change in me traces back to you. You are my common denominator, the one thing that keeps all the fractions of me whole. Without you, I am undefined. You are the proof of my theorem, the reason why my logic finally stands its ground. You are the only variable I refuse to eliminate. Headache isn't it HAHAHA well, the next subject will get more complicated, so buckle up and prepare your mind, no kidding though.</p>
+
+                <p>History. This one would be the best lol. History itself intertwines the past, the present, and the future. Haven't I already met you before? I mean, if past lives were real, wouldn't Deja Vu make sense? For the most part, it should make sense since I feel like everything that is happening right now has already happened before. You are the artifact I would like to preserve forevermore. Loving you made me feel like I just discovered something ancient and sacred that I would like to keep for myself. You are like a discovery of lands that reshaped my entire world, that unlocked new continents that I never knew existed. You are my era, the time this kind of love began, that made me complete. Before I even met you, my life was prehistory, and with you, everything is now documented. You are the ink that makes me significant, that ensures that I am not forgotten.</p>
+
+                <p>My love, let us write our own story, you and me together. You are my safe place, the one I always look for at the end of every passing day, the one I long for whenever I feel distressed, the one I search for when I am at my lowest. You are always there for me, giving me strength, courage, love, and support in ways I will always cherish. Mahal, with you by my side, there is nothing in this world that I would be scared of. I vow to love you the best that I can. I know that there would be times that I can not fully express my love and gratitude for you, but trust me I am more than grateful to have you in my life.</p>
+
+                <p>You are my shield in this world full of uncertainty, you showed me consistency that I don't even know if I deserve. You stepped out of your comfort zone because I believe that you also want us to work out, I won't lie when I say that I get that aching pain in my chest whenever we are arguing, it's because I am also scared of losing you. I ache for you, long for you, hurt for you, cry for you, and I love you wholeheartedly, and maybe you will question the love that I am talking about which I respect since there are times that this kind of love isn't working, maybe too much or maybe a little I can't feel it enough to even consider it love.</p>
+
+                <p>I do so much, I am not someone who is perfect that can give you everything in life, all I can do is to promise you to love you as that is the only thing I know not in ways that you want to expect but in my own ways. The way you get disappointed in me, I know it is all valid since that is what you are feeling, you want me to be more of who I am, it is for our own growth and I know it, but then I see myself with those kind of judgements I had to endure during this life time. All I want for us is to succeed and win in life by each other's side no matter how hard it may seem, I want to do everything with you.</p>
+
+            </p>
+        </div>
     </div>
-</div>
 
-<div class="celebration" id="celebration">
-    <h1>I knew it Baby!, you'll say yes!. Mwahh 💋</h1>
-    
-    <div class="pixel-art dance">
-        🐱💃 🐱💃 🐱💃 🐶🎉
-    </div>
+    <script>
+        (function() {
+            const readPrompt = document.getElementById('readPrompt');
+            const celebrationDiv = document.getElementById('celebrationArea');
+            
+            readPrompt.addEventListener('click', () => {
+                celebrationDiv.style.display = 'flex';
+                celebrationDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
 
-    <!-- EDIT THIS LINK -->
-    <button class="link-btn" id="linkBtn" onclick="goToLink()">Click Me 💌</button>
-</div>
+            const linkBtn = document.getElementById('dynamicLinkBtn');
+            // ★ EDIT YOUR LINK HERE ★
+            const customLink = "https://www.youtube.com/watch?v=6fABN7sYitk";
+            
+            linkBtn.addEventListener('click', () => {
+                window.open(customLink, '_blank');
+            });
+        })();
+    </script>
 
-<script>
-const noBtn = document.getElementById("noBtn");
-
-function moveNo() {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 150);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-}
-
-function sayYes() {
-    document.getElementById("main").style.display = "none";
-    document.getElementById("celebration").style.display = "block";
-    document.getElementById("linkBtn").style.display = "inline-block";
-}
-
-function goToLink() {
-    // 🔥 REPLACE THIS LINK WITH YOUR OWN
-    window.location.href = "https://example.com";
-}
-</script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </body>
 </html>
